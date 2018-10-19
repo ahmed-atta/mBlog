@@ -24,6 +24,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('National ID') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="national_id" type="text" class="form-control{{ $errors->has('national_id') ? ' is-invalid' : '' }}" name="national_id" value="{{ old('national_id') }}" required autofocus>
+
+                                @if ($errors->has('national_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('national_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

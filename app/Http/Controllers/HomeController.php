@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Auth;
+
 
 class HomeController extends Controller
 {
@@ -22,7 +25,19 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('home');
+    {   
+        /*$posts = Post::with(['user' => function($query)
+        {
+            $query->where('gender', '=',Auth::user()->gender);
+        
+        }])->orderBy('created_at', 'desc')->paginate(10);*/   // NOT Working Well 
+        $posts = \DB::table('posts')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->select('posts.*', 'users.name')
+            ->where('users.gender',Auth::user()->gender)
+            ->orderBy('posts.created_at', 'desc')->paginate(10);
+
+
+        return view('home', ['posts' => $posts]);
     }
 }

@@ -21,5 +21,6 @@ Route::get('profile/edit', 'ProfileController@edit');
 Route::put('profile/update', 'ProfileController@update')->name('profile.update');
 Route::group(['middleware' => ['gender']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('post/store', 'PostController@store')->name('post.store');
 });
 
